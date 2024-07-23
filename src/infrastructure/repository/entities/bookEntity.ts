@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity("book")
 export class BookEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -10,4 +10,7 @@ export class BookEntity {
 
   @Column()
   author: string;
+
+  @Column()
+  year: number;
 }

@@ -1,7 +1,9 @@
 import { Book } from "src/domain/entities/book.entity";
 import { IBookRepository } from "../interfaces/repository/book.repository.abstract";
 import { IBookService } from "../interfaces/services/Ibook.service.interface";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class BookService extends IBookService {
   constructor(private readonly bookRepository: IBookRepository) {
     super();

@@ -12,11 +12,10 @@ import { BookEntity } from "./repository/entities/bookEntity";
       username: "postgres",
       password: "test",
       database: "test",
-      entities: [BookEntity],
+      autoLoadEntities: true,
       synchronize: true,
     }),
     DomainModule,
-    TypeOrmModule.forFeature([BookEntity]),
   ],
 })
 export class InfrastructureModule {}
