@@ -20,6 +20,6 @@ export class BookRepositoryImpl extends IBookRepository {
   }
 
   async findAll(): Promise<Book[]> {
-    return this.bookRepository.find();
+    return this.bookRepository.find({ relations: ["authors"] });
   }
 }

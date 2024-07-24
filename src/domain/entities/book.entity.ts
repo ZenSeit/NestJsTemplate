@@ -1,6 +1,8 @@
+import { Author } from "./author.entity";
+
 export interface Book {
   id: number;
   title: string;
-  author: string;
+  authors: Author[];
   year:number
 }

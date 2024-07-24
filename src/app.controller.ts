@@ -1,9 +1,13 @@
 import { Controller, Get, Param, Post } from "@nestjs/common";
 import { IBookService } from "./application/interfaces/services/Ibook.service.interface";
+import { IAuthorService } from "./application/interfaces/services/Iauthor.service.interface";
 
 @Controller()
 export class AppController {
-  constructor(private readonly bookService: IBookService) {}
+  constructor(
+    private readonly bookService: IBookService,
+    private readonly authorService: IAuthorService
+  ) {}
 
   @Get("books")
   async getBooks(): Promise<any> {
@@ -18,5 +22,10 @@ export class AppController {
   @Post("books")
   async createBook(@Param() book: any): Promise<any> {
     return this.bookService.createBook(book);
+  }
+
+  @Get("authors")
+  async getAuthors(): Promise<any> {
+    return this.authorService.getAuthors();
   }
 }
