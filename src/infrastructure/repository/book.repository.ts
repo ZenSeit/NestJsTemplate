@@ -5,14 +5,15 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 
 export class BookRepositoryImpl extends IBookRepository {
-  create(book: Book): Promise<Book> {
-    throw new Error("Method not implemented.");
-  }
   constructor(
     @InjectRepository(BookEntity)
     private readonly bookRepository: Repository<BookEntity>,
   ) {
     super();
+  }
+
+  create(book: Book): Promise<Book> {
+    return this.bookRepository.save(book);
   }
 
   async findByName(name: string): Promise<Book> {

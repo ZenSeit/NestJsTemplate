@@ -1,6 +1,9 @@
-import { Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Res } from "@nestjs/common";
 import { IBookService } from "../../application/interfaces/services/Ibook.service.interface";
 import { IAuthorService } from "../../application/interfaces/services/Iauthor.service.interface";
+import { Book } from "src/domain/entities/book.entity";
+import { CreateBookDto } from "src/application/dtos/createBook.dto.interface";
+import { Response } from 'express';
 
 @Controller()
 export class AppController {
@@ -20,8 +23,10 @@ export class AppController {
   }
 
   @Post("books")
-  async createBook(@Param() book: any): Promise<any> {
-    return this.bookService.createBook(book);
+  async createBook(@Body() book: CreateBookDto,@Res() res:Response): Promise<Response>{
+
+    await this.bookService.createBook(book);
+    return res.status(201).send();
   }
 
   @Get("authors")

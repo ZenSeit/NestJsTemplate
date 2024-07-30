@@ -1,8 +1,8 @@
 import { Book } from "./book.entity";
 
 export interface Author {
-    id: number;
+    id?: number;
     name: string;
-    country: string;
-    books: Book[];
+    country?: string;
+    books?: Book[];
     }

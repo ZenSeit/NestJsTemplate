@@ -1,7 +1,7 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { IAuthorRepository } from "src/application/interfaces/repository/author.repository.abstract";
 import { Author } from "src/domain/entities/author.entity";
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { AuthorEntity } from "./entities/authorEntity";
 
 export class AuthorRepositoryImpl extends IAuthorRepository {
@@ -11,7 +11,10 @@ export class AuthorRepositoryImpl extends IAuthorRepository {
   ) {
     super();
   }
-
+  
+  async findByIds(ids: number[]): Promise<Author[]> {
+    return await this.authorRepository.findBy({ id: In(ids) })
+  }
   async findAll(): Promise<Author[]> {
     return await this.authorRepository.find();
   }

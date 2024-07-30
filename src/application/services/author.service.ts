@@ -5,11 +5,14 @@ import { IAuthorRepository } from "../interfaces/repository/author.repository.ab
 
 @Injectable()
 export class AuthorService extends IAuthorService{
-
+    
     constructor(private readonly authorRepository: IAuthorRepository) {
         super();
     }
-
+    
+    async getAuthorsByIds(id: number[]): Promise<Author[]> {
+        return this.authorRepository.findByIds(id);
+    }
     async getAuthors(): Promise<Author[]> {
         return this.authorRepository.findAll();
     }
