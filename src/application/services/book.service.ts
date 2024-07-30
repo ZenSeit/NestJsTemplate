@@ -1,7 +1,7 @@
 import { Book } from "src/domain/entities/book.entity";
 import { IBookRepository } from "../interfaces/repository/book.repository.abstract";
 import { IBookService } from "../interfaces/services/Ibook.service.interface";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 
 @Injectable()
 export class BookService extends IBookService {
@@ -14,6 +14,10 @@ export class BookService extends IBookService {
   }
 
   async getBookName(name: string): Promise<Book> {
+    const book = await this.bookRepository.findByName(name);
+    if (!book) {
+      throw new NotFoundException(`Book with name ${name} not found`);
+    }
     return this.bookRepository.findByName(name);
   }
 
