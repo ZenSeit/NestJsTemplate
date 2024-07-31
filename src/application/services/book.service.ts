@@ -21,12 +21,12 @@ export class BookService extends IBookService {
     if (!book) {
       throw new NotFoundException(`Book with name ${name} not found`);
     }
-    return this.bookRepository.findByName(name);
+    return book;
   }
 
   async createBook(book: CreateBookDto): Promise<Book> {
     const autorsBook = await this.authorService.getAuthorsByIds(book.authors);
-    if (autorsBook.length !== book.authors.length) {
+    if (autorsBook.length ===0) {
       throw new NotFoundException("Author not found");
     }
     const bookEntity: Book = {
